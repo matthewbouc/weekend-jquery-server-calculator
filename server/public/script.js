@@ -71,8 +71,8 @@ function getCalculationHistory(){
 function postCalculationToServer(){
     $.ajax({
         method: 'POST',
-        url: '/equalbutton',
-        data: calculatorObject
+        url: '/equalButton',
+        data: {calculatorObject}
     })
     .then(function(response){
         console.log('equation sent', response)

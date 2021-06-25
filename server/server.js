@@ -16,15 +16,15 @@ app.listen(PORT, () => {
 let equationHistory = [];
 
 
-app.get('/equationHistory'), function(req,res){
+app.get('/equationHistory', function(req,res){
     console.log('sending history array');
     res.send(equationHistory);
-}
+})
 
-app.post('/equalbutton'), function(req, res){
+app.post('/equalButton', function(req, res){
     console.log('receiving equation,', req.body);
     let equation = req.body.calculatorObject;
     console.log('new equation', equation);
     equationHistory.push(equation);
     res.sendStatus(201);
-}
+})
