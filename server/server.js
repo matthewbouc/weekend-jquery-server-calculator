@@ -25,6 +25,15 @@ app.post('/equalButton', function(req, res){
     console.log('receiving equation,', req.body);
     let equation = req.body.calculatorObject;
     console.log('new equation', equation);
-    equationHistory.push(equation);
+    convertPost(equation);
+    //equationHistory.push(equation); // Do this as a function instead?!
     res.sendStatus(201);
 })
+
+function convertPost(equationObject){
+    let equationString = ''
+    for (property in equationObject){
+        equationString += equationObject[property]
+    }
+    console.log(equationString)
+}
