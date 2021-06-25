@@ -52,6 +52,20 @@ function getNumberInputs(){
 
 //GET request - need this to happen on page load and on equal button
 
+function getCalculationHistory(){
+    $.ajax({
+        method: 'GET',
+        url: '/equationHistory',
+    })
+    .then(function (response){
+        console.log('Received Inventory List', response);
+        // RUN DISPLAY HISTORY HERE(response);
+    })
+    .catch(function(error){
+        console.log('Error', error);
+    })
+}
+
 //POST request
 
 function postCalculationToServer(){
