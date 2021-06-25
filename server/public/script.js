@@ -1,9 +1,9 @@
 $(document).ready(readyNow);
 
 let calculatorObject = {
-    inputOne: '0',
-    operationInput: '0',
-    inputTwo: '0',
+    inputOne: '',
+    operationInput: '',
+    inputTwo: '',
 };
 
 
@@ -24,6 +24,12 @@ function getOperationButton(){
 
 // Get input 1
 
+function getNumberInputs(){
+    let firstInput = $('#firstInput').val();
+    let secondInput = $('#secondInput').val();
+    calculatorObject.inputOne = firstInput;
+    calculatorObject.inputTwo = secondInput;
+}
 
 // Get input 2
 
