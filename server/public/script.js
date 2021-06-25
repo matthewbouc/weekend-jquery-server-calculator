@@ -28,7 +28,8 @@ function equalButtonPushed(){
     if(calculatorObject.inputOne == '' || calculatorObject.operationInput == '' || calculatorObject.inputTwo == ''){
         alert('Number inputs and operand required')
     } else {
-        // RUN THE POST SEQUENCE HERE
+        console.log('sending to server...')
+        postCalculationToServer();
     }
 }
 
@@ -52,3 +53,18 @@ function getNumberInputs(){
 //GET request - need this to happen on page load and on equal button
 
 //POST request
+
+function postCalculationToServer(){
+    $.ajax({
+        method: 'POST',
+        url: '/equalbutton',
+        data: calculatorObject
+    })
+    .then(function(response){
+        console.log('equation sent', response)
+        // RUN THE GET RESPONSE HERE
+    })
+    .catch(function(error){
+        console.log('Error', error)
+    })
+}
