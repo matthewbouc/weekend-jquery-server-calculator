@@ -8,8 +8,9 @@ let calculatorObject = {
 
 
 function readyNow(){
-    console.log('in JQ')
-    $('.operationButton').on('click', getOperationButton)
+    console.log('in JQ');
+    $('.operationButton').on('click', getOperationButton);
+    $('#equalSign').on('click', equalButtonPushed)
 }
 
 function getOperationButton(){
@@ -21,8 +22,18 @@ function getOperationButton(){
 
 
 
+function equalButtonPushed(){
+    getNumberInputs();
+    console.log(calculatorObject)
+    if(calculatorObject.inputOne == '' || calculatorObject.operationInput == '' || calculatorObject.inputTwo == ''){
+        alert('Number inputs and operand required')
+    } else {
+        // RUN THE POST SEQUENCE HERE
+    }
+}
 
-// Get input 1
+
+// Get input 1 // get input 2
 
 function getNumberInputs(){
     let firstInput = $('#firstInput').val();
@@ -31,7 +42,6 @@ function getNumberInputs(){
     calculatorObject.inputTwo = secondInput;
 }
 
-// Get input 2
 
 // Get = button
 
