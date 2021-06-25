@@ -11,6 +11,7 @@ function readyNow(){
     console.log('in JQ');
     $('.operationButton').on('click', getOperationButton);
     $('#equalSign').on('click', equalButtonPushed)
+    getCalculationHistory();
 }
 
 function getOperationButton(){
