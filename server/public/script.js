@@ -45,13 +45,8 @@ function getNumberInputs(){
 }
 
 
-// Get = button
-
 // get C button
 
-// Create an object that all manth inputs get sent to
-
-//GET request - need this to happen on page load and on equal button
 
 function getCalculationHistory(){
     $.ajax({
@@ -82,4 +77,16 @@ function postCalculationToServer(){
     .catch(function(error){
         console.log('Error', error)
     })
+}
+
+
+function processGetArray(responseArray){
+    for (object of responseArray){
+        let responseString = ''
+        //Isolate answer property here and display.. then do following:
+        for (property in object){
+            responseString += object[property]
+        }
+        //APPEND FUNCTION HERE
+    }
 }
