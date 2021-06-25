@@ -25,10 +25,23 @@ app.post('/equalButton', function(req, res){
     console.log('receiving equation,', req.body);
     let equation = req.body.calculatorObject;
     console.log('new equation', equation);
-    convertPost(equation);
+    getResponseToPost(equation);
     //equationHistory.push(equation); // Do this as a function instead?!
     res.sendStatus(201);
 })
+
+
+// function that handles and creates a new object to resend to the client
+
+function getResponseToPost(equation){
+    let stringEval = convertPost(equation);
+    equation.answer = stringEval;
+    console.log(stringEval)
+    console.log (equation);
+    equationHistory.push(equation);
+    console.log(equationHistory);
+}
+
 
 function convertPost(equationObject){
     let equationString = ''
@@ -36,4 +49,5 @@ function convertPost(equationObject){
         equationString += equationObject[property]
     }
     console.log(equationString)
+    return eval(equationString);
 }
