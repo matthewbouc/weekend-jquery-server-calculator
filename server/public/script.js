@@ -27,6 +27,21 @@ function readyNow(){ // runs on document load
 }
 
 
+/**
+ * When numbers or . is clicked, add to display and inputDisplay variable.
+ */
+function appendButtonClicks(){
+    let buttonClick = $(this).attr('id');
+    console.log(buttonClick);
+    inputDisplay += buttonClick;
+    console.log(inputDisplay);
+    $('#onlyInput').val(inputDisplay);
+}
+
+
+/**
+ * clears calculatorObject properties to prevent duplicate entries
+ */
 function clearCalculatorObject(){
     calculatorObject = {
         inputOne: '',
@@ -37,12 +52,31 @@ function clearCalculatorObject(){
 
 
 /**
- * Clears DOM number inputs and answer display on C click
+ * Clears DOM number inputs and answer display on C click. Clears inputDisplay
  */
 function clickClearButton(){ // GOOD
     $('.numberInputs').val('');
     $('#answer').empty();
     inputDisplay = ''
+}
+
+
+/**
+ * sends DELETE request to server to delete History array. Updates DOM.
+ */
+function deleteCalculationHistory(){
+    $.ajax({
+        method: 'DELETE',
+        url: '/equationHistory'
+    })
+    .then(function(response){
+        console.log(`successful delete`, response);
+        getCalculationHistory();
+        updateInputDisplay('');
+    })
+    .catch(function(error){
+        console.log(`Error`, error);
+    })
 }
 
 
@@ -78,29 +112,6 @@ function getCalculationHistory(){
     .catch(function(error){
         console.log('Error', error);
     })
-}
-
-
-/**
- * UPDATE
- */
-function retrieveNumberInputs(){
-    const stringInput = $('#onlyInput').val();
-    console.log(`stringInput`, stringInput);
-    const operandUsed = calculatorObject.operationInput;
-    const inputArray = stringInput.split(operandUsed);
-    calculatorObject.inputOne = inputArray[0];
-    calculatorObject.inputTwo = inputArray[1];
-    console.log(inputArray);
-}
-
-
-function appendButtonClicks(){
-    let buttonClick = $(this).attr('id');
-    console.log(buttonClick);
-    inputDisplay += buttonClick;
-    console.log(inputDisplay);
-    $('#onlyInput').val(inputDisplay);
 }
 
 
@@ -142,11 +153,6 @@ function postCalculationToServer(){
 }
 
 
-function updateInputDisplay(displayString){
-    inputDisplay = displayString
-    $('#onlyInput').val(inputDisplay)
-}
-
 /**
  * Empties previous DOM answer and history. Appends new answer and updated history.
  * @param {array} responseArray 
@@ -166,22 +172,10 @@ function processGetArray(responseArray){
 }
 
 
-function deleteCalculationHistory(){
-    $.ajax({
-        method: 'DELETE',
-        url: '/equationHistory'
-    })
-    .then(function(response){
-        console.log(`successful delete`, response);
-        getCalculationHistory();
-        updateInputDisplay('');
-    })
-    .catch(function(error){
-        console.log(`Error`, error);
-    })
-}
-
-
+/**
+ * Allows user to click on a DOM history calculation and 'rerun' it.
+ * Sets the answer to the input display.
+ */
 function rerunCalculation(){
     const returnAnswer = $(this).attr('id');
     updateInputDisplay(returnAnswer);
@@ -189,7 +183,25 @@ function rerunCalculation(){
 }
 
 
-// POSSIBLE IDEAS
-// if another operand is hit after one has already been assigned to Object
-// run a POST request, then use the answer as the next input
-// This would require clearing the object each time
+/**
+ * Takes the value of the input and creates an Object that is ready for POST.
+ */
+ function retrieveNumberInputs(){
+    const stringInput = $('#onlyInput').val();
+    console.log(`stringInput`, stringInput);
+    const operandUsed = calculatorObject.operationInput;
+    const inputArray = stringInput.split(operandUsed);
+    calculatorObject.inputOne = inputArray[0];
+    calculatorObject.inputTwo = inputArray[1];
+    console.log(inputArray);
+}
+
+
+/**
+ * Takes in a parameter which will become the new input display.
+ * @param {String} displayString 
+ */
+function updateInputDisplay(displayString){
+    inputDisplay = displayString
+    $('#onlyInput').val(inputDisplay)
+}
