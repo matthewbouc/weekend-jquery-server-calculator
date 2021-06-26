@@ -52,3 +52,17 @@ h1 {
     width: 175px;
     height: 40px;
 }
+
+.history {
+    display: block;
+    margin-left: 25%;
+    margin-right: auto;
+}
+
+.previousCalc {
+    margin-top: 7px;
+    list-style-type: none;
+    display: block;
+    margin-left: -2%;
+    margin-right: auto;
+}
