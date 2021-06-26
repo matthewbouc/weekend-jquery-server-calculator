@@ -1,0 +1,33 @@
+h1 {
+    margin-left: 150px;
+    margin-top: 30px;
+}
+
+#calculator {
+    margin-left: 200px;
+    margin-top: 20px;
+}
+
+#onlyInput {
+    width: 168px;
+    height: 24px;
+    margin-bottom: 8px;
+}
+
+#clearButton {
+    height: 30px;
+    width: 30px;
+}
+
+#buttonInputs {
+    display: grid;
+    grid-template-columns: 40px 40px 40px 40px;
+    grid-template-rows: 40px 40px 40px 40px;
+    grid-gap: 5px;
+}
+
+#clearHistory {
+    margin-top: 30px;
+    width: 175px;
+    height: 40px;
+}

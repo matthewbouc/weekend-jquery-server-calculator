@@ -1,58 +1,52 @@
 $(document).ready(readyNow);
 
+//object is used to accept inputs, then POST to server
 let calculatorObject = {
     inputOne: '',
     operationInput: '',
     inputTwo: '',
 };
 
-
-function readyNow(){
-    console.log('in JQ');
-    $('.operationButton').on('click', getOperationButton);
-    $('#equalSign').on('click', equalButtonPushed);
-    $('#clearButton').on('click', pushClearButton);
-    getCalculationHistory();
-}
-
-function getOperationButton(){
-    let operation = $(this).attr('id');
-    calculatorObject.operationInput = operation;
-    console.log(`operator selected:`, operation)
-    console.log(calculatorObject)
+/**
+ * Runs on document load.  Initiates multiple .on('click') functions.
+ * Retrieves any previous calculation history from the server.
+ */
+function readyNow(){ // runs on document load
+    //console.log('in JQ');
+    $('.operationButton').on('click', getOperationButton); // on +, -, *, / button click
+    $('#equalSign').on('click', equalButtonPushed); // on = button click
+    $('#clearButton').on('click', clickClearButton); // on C button click
+    getCalculationHistory(); // retrieve any stored server history
 }
 
 
+/**
+ * Clears DOM number inputs and answer display on C click
+ */
+function clickClearButton(){
+    $('.numberInputs').val('');
+    $('#answer').empty();
+}
 
+
+/**
+ * On = click, Runs getNumberInputs(). If inputs are empty, triggers alert. Initiates POST to server.
+ */
 function equalButtonPushed(){
     getNumberInputs();
     console.log(calculatorObject)
     if(calculatorObject.inputOne == '' || calculatorObject.operationInput == '' || calculatorObject.inputTwo == ''){
         alert('Number inputs and operand required')
     } else {
-        console.log('sending to server...')
+        //console.log('sending to server...')
         postCalculationToServer();
     }
 }
 
 
-// Get input 1 // get input 2
-
-function getNumberInputs(){
-    let firstInput = $('#firstInput').val();
-    let secondInput = $('#secondInput').val();
-    calculatorObject.inputOne = firstInput;
-    calculatorObject.inputTwo = secondInput;
-}
-
-
-function pushClearButton(){
-    $('.numberInputs').val('');
-    $('#answer').empty();
-}
-
-
-
+/**
+ * Runs GET request to server at /equationHistory.  Processes data response.
+ */
 function getCalculationHistory(){
     $.ajax({
         method: 'GET',
@@ -68,8 +62,33 @@ function getCalculationHistory(){
     })
 }
 
-//POST request
 
+/**
+ * Retrieves values from number inputs and assigns them to calculatorObject.
+ */
+function getNumberInputs(){
+    let firstInput = $('#firstInput').val();
+    let secondInput = $('#secondInput').val();
+    calculatorObject.inputOne = firstInput;
+    calculatorObject.inputTwo = secondInput;
+}
+
+
+/**
+ * Runs on click of an operation button.  Assigns to calculatorObject.
+ */
+function getOperationButton(){
+    let operation = $(this).attr('id');
+    calculatorObject.operationInput = operation;
+    //console.log(`operator selected:`, operation)
+    //console.log(calculatorObject)
+}
+
+
+/**
+ * POST request to server containing finalized calculatorObject.
+ * On successful POST, initiates getCalculationHistory()
+ */
 function postCalculationToServer(){
     $.ajax({
         method: 'POST',
@@ -87,6 +106,10 @@ function postCalculationToServer(){
 }
 
 
+/**
+ * Empties previous DOM answer and history. Appends new answer and updated history.
+ * @param {array} responseArray 
+ */
 function processGetArray(responseArray){
     $('#answer').empty();
     $('#calculationHistory').empty()
@@ -101,4 +124,3 @@ function processGetArray(responseArray){
         $('#calculationHistory').append(`No Calculation History`)
     }
 }
-// base mode complete

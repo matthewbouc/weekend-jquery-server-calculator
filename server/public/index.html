@@ -5,19 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
     <h1>CALCULATOR TIME</h1>
 
-    <input type="number" class="numberInputs" id="firstInput"/>
-    <button class="operationButton" id="+">+</button>
-    <button class="operationButton" id="-">-</button>
-    <button class="operationButton" id="*">*</button>
-    <button class="operationButton" id="/">/</button>
-    <input type="number" class="numberInputs" id="secondInput"/>
-    <button id="equalSign">=</button>
-    <button id="clearButton">C</button>
-
+    <div id="calculator">
+        <input type="number" class="numberInputs" id="onlyInput"/>
+        <button id="clearButton">C</button>
+        <div id="buttonInputs">
+            <button class="numberButton" id="7">7</button>
+            <button class="numberButton" id="8">8</button>
+            <button class="numberButton" id="9">9</button>
+            <button class="operationButton" id="+">+</button>
+            <button class="numberButton" id="4">4</button>
+            <button class="numberButton" id="5">5</button>
+            <button class="numberButton" id="6">6</button>
+            <button class="operationButton" id="-">-</button>
+            <button class="numberButton" id="1">1</button>
+            <button class="numberButton" id="2">2</button>
+            <button class="numberButton" id="3">3</button>
+            <button class="operationButton" id="*">*</button>
+            <button class="numberButton" id="0">0</button>
+            <button id=".">.</button>
+            <button id="equalSign">=</button>
+            <button class="operationButton" id="/">/</button>
+            <button id="clearHistory">Clear History</button>
+        </div>
+    </div>
     <h3 id="answer">
         <!-- answer appended here -->
     </h3>
