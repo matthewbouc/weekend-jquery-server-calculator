@@ -56,6 +56,7 @@ function getCalculationHistory(){
     .then(function (response){
         console.log('Received Inventory List', response);
         // RUN DISPLAY HISTORY HERE(response);
+        processGetArray(response);
     })
     .catch(function(error){
         console.log('Error', error);
@@ -73,6 +74,7 @@ function postCalculationToServer(){
     .then(function(response){
         console.log('equation sent', response)
         // RUN THE GET RESPONSE HERE
+        getCalculationHistory();
     })
     .catch(function(error){
         console.log('Error', error)
@@ -81,12 +83,16 @@ function postCalculationToServer(){
 
 
 function processGetArray(responseArray){
-    for (object of responseArray){
-        let responseString = ''
-        //Isolate answer property here and display.. then do following:
-        for (property in object){
-            responseString += object[property]
+    $('#answer').empty();
+    $('#calculationHistory').empty()
+    if (responseArray.length > 0){
+        $('#answer').append(responseArray[responseArray.length-1].answer);
+        for (object of responseArray){
+            $('#calculationHistory').append(
+                `<li>${object.inputOne} ${object.operationInput} ${object.inputTwo} = ${object.answer} </li>`
+            )
         }
-        //APPEND FUNCTION HERE
+    } else {
+        $('#calculationHistory').append(`No Calculation History`)
     }
 }
