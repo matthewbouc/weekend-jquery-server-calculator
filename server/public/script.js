@@ -23,9 +23,9 @@ function readyNow(){ // runs on document load
     $('#clearButton').on('click', clickClearButton); // on C button click
     $('.numberButton').on('click', appendButtonClicks); // on number button click
     $('#clearHistory').on('click', deleteCalculationHistory); // on clear history button click
-    $('#calculationHistory').on('click','.previousCalc', rerunCalculation);
+    $('#calculationHistory').on('click','.previousCalc', rerunCalculation); // on previous calculation click
+    $('#backspace').on('click', backspaceButton);
     getCalculationHistory(); // retrieves stored server data on page load.
-    updateInputDisplay('');
 }
 
 
@@ -34,9 +34,23 @@ function readyNow(){ // runs on document load
  */
 function appendButtonClicks(){
     let buttonClick = $(this).attr('id');
-    console.log(buttonClick);
+    //console.log(buttonClick);
     inputDisplay += buttonClick;
-    console.log(inputDisplay);
+    //console.log(inputDisplay);
+    $('#onlyInput').val(inputDisplay);
+}
+
+
+function backspaceButton(){
+    //console.log('backspace pushed')
+    console.log(inputDisplay)
+    const removedValue = inputDisplay.slice(-1);
+    inputDisplay = inputDisplay.slice(0,-1);
+    //console.log(removedValue);
+    const possibleOperands = '+*-/'
+    if (possibleOperands.indexOf(removedValue) >= 0) {
+        calculatorObject.operationInput = '';
+    }
     $('#onlyInput').val(inputDisplay);
 }
 
@@ -204,6 +218,6 @@ function rerunCalculation(){
  * @param {String} displayString 
  */
 function updateInputDisplay(displayString){
-    inputDisplay = displayString; // change global variable
-    $('#onlyInput').val(displayString); // change DOM
+    inputDisplay = String(displayString); // change global variable
+    $('#onlyInput').val(inputDisplay); // change DOM
 }
