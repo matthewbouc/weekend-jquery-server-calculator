@@ -10,7 +10,8 @@ let calculatorObject = {
 function readyNow(){
     console.log('in JQ');
     $('.operationButton').on('click', getOperationButton);
-    $('#equalSign').on('click', equalButtonPushed)
+    $('#equalSign').on('click', equalButtonPushed);
+    $('#clearButton').on('click', pushClearButton);
     getCalculationHistory();
 }
 
@@ -45,7 +46,11 @@ function getNumberInputs(){
 }
 
 
-// get C button
+function pushClearButton(){
+    $('.numberInputs').val('');
+    $('#answer').empty();
+}
+
 
 
 function getCalculationHistory(){
