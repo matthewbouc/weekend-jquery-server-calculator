@@ -9,31 +9,32 @@
 </head>
 <body>
     <h1>CALCULATOR TIME</h1>
-
-    <div id="calculator">
-        <button id="clearButton">C</button>
-        <input type="text" class="numberInputs" id="onlyInput"/>
-        <button id="backspace">←</button>
-        <div id="buttonInputs">
-            <button class="numberButton" id="7">7</button>
-            <button class="numberButton" id="8">8</button>
-            <button class="numberButton" id="9">9</button>
-            <button class="operationButton" id="+">+</button>
-            <button class="numberButton" id="4">4</button>
-            <button class="numberButton" id="5">5</button>
-            <button class="numberButton" id="6">6</button>
-            <button class="operationButton" id="-">-</button>
-            <button class="numberButton" id="1">1</button>
-            <button class="numberButton" id="2">2</button>
-            <button class="numberButton" id="3">3</button>
-            <button class="operationButton" id="*">*</button>
-            <button class="numberButton" id="0">0</button>
-            <button class="numberButton" id=".">.</button>
-            <button id="equalSign">=</button>
-            <button class="operationButton" id="/">/</button>
-            <button id="clearHistory">Clear History</button>
+    <div id="calculatorEnd">
+        <div id="calculator">
+            <input type="text" class="numberInputs" id="onlyInput"/>
+            <button class="extraButton" id="backspace">←</button>
+            <button class="extraButton" id="clearButton">C</button>
+            <div id="buttonInputs">
+                <button class="numberButton" id="7">7</button>
+                <button class="numberButton" id="8">8</button>
+                <button class="numberButton" id="9">9</button>
+                <button class="operationButton" id="+">+</button>
+                <button class="numberButton" id="4">4</button>
+                <button class="numberButton" id="5">5</button>
+                <button class="numberButton" id="6">6</button>
+                <button class="operationButton" id="-">-</button>
+                <button class="numberButton" id="1">1</button>
+                <button class="numberButton" id="2">2</button>
+                <button class="numberButton" id="3">3</button>
+                <button class="operationButton" id="*">*</button>
+                <button class="numberButton" id="0">0</button>
+                <button class="numberButton" id=".">.</button>
+                <button class="extraButton" id="equalSign">=</button>
+                <button class="operationButton" id="/">/</button>
+                <button class="extraButton" id="clearHistory">Clear History</button>
+            </div>
         </div>
-    </div>
+    </div>  
     <h3 id="answer">
         <!-- answer appended here -->
     </h3>
