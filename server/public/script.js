@@ -27,6 +27,15 @@ function readyNow(){ // runs on document load
 }
 
 
+function clearCalculatorObject(){
+    calculatorObject = {
+        inputOne: '',
+        operationInput: '',
+        inputTwo: '',
+    }
+}
+
+
 /**
  * Clears DOM number inputs and answer display on C click
  */
@@ -48,6 +57,7 @@ function equalButtonPushed(){
     } else {
         //console.log('sending to server...')
         postCalculationToServer();
+        clearCalculatorObject();
     }
 }
 
@@ -98,12 +108,16 @@ function appendButtonClicks(){
  * Runs on click of an operation button.  Assigns to calculatorObject.
  */
 function getOperationButton(){
-    let operation = $(this).attr('id');
-    inputDisplay += operation;
-    $('#onlyInput').val(inputDisplay);
-    calculatorObject.operationInput = operation;
-    //console.log(`operator selected:`, operation)
-    //console.log(calculatorObject)
+    if (calculatorObject.operationInput){
+        alert(`Operand already selected.  Clear or submit calculation`)
+    } else {
+        let operation = $(this).attr('id');
+        inputDisplay += operation;
+        $('#onlyInput').val(inputDisplay);
+        calculatorObject.operationInput = operation;
+        //console.log(`operator selected:`, operation)
+        //console.log(calculatorObject)
+    }
 }
 
 
@@ -140,7 +154,7 @@ function updateInputDisplay(displayString){
 function processGetArray(responseArray){
     $('#calculationHistory').empty()
     if (responseArray.length > 0){
-        updateInputDisplay(responseArray[responseArray.length-1].answer);
+        updateInputDisplay(responseArray[responseArray.length-1].answer);////
         for (object of responseArray){
             $('#calculationHistory').append(
                 `<li class="previousCalc" id="${object.answer}">${object.inputOne} ${object.operationInput} ${object.inputTwo} = ${object.answer}</li>`
@@ -171,6 +185,7 @@ function deleteCalculationHistory(){
 function rerunCalculation(){
     const returnAnswer = $(this).attr('id');
     updateInputDisplay(returnAnswer);
+    clearCalculatorObject();
 }
 
 
