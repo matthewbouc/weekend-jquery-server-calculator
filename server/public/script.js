@@ -17,13 +17,15 @@ let inputDisplay = ''
  */
 function readyNow(){ // runs on document load
     //console.log('in JQ');
-    $('.operationButton').on('click', getOperationButton); // on +, -, *, / button click
+    $('#onlyInput').prop('disabled', true); // blocks user from typing info into input.
+    $('.operationButton').on('click', getOperationButton); // on operand button click
     $('#equalSign').on('click', equalButtonPushed); // on = button click
     $('#clearButton').on('click', clickClearButton); // on C button click
-    $('.numberButton').on('click', appendButtonClicks);
-    $('#clearHistory').on('click', deleteCalculationHistory);
-    $('#calculationHistory').on('click','.previousCalc', rerunCalculation)
-    getCalculationHistory(); // retrieve any stored server history
+    $('.numberButton').on('click', appendButtonClicks); // on number button click
+    $('#clearHistory').on('click', deleteCalculationHistory); // on clear history button click
+    $('#calculationHistory').on('click','.previousCalc', rerunCalculation);
+    getCalculationHistory(); // retrieves stored server data on page load.
+    updateInputDisplay('');
 }
 
 
@@ -160,7 +162,7 @@ function postCalculationToServer(){
 function processGetArray(responseArray){
     $('#calculationHistory').empty()
     if (responseArray.length > 0){
-        updateInputDisplay(responseArray[responseArray.length-1].answer);////
+        updateInputDisplay(responseArray[responseArray.length-1].answer);
         for (object of responseArray){
             $('#calculationHistory').append(
                 `<li class="previousCalc" id="${object.answer}">${object.inputOne} ${object.operationInput} ${object.inputTwo} = ${object.answer}</li>`
@@ -202,6 +204,6 @@ function rerunCalculation(){
  * @param {String} displayString 
  */
 function updateInputDisplay(displayString){
-    inputDisplay = displayString
-    $('#onlyInput').val(inputDisplay)
+    inputDisplay = displayString; // change global variable
+    $('#onlyInput').val(displayString); // change DOM
 }
