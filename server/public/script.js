@@ -22,6 +22,7 @@ function readyNow(){ // runs on document load
     $('#clearButton').on('click', clickClearButton); // on C button click
     $('.numberButton').on('click', appendButtonClicks);
     $('#clearHistory').on('click', deleteCalculationHistory);
+    $('#calculationHistory').on('click','.previousCalc', rerunCalculation)
     getCalculationHistory(); // retrieve any stored server history
 }
 
@@ -142,7 +143,7 @@ function processGetArray(responseArray){
         updateInputDisplay(responseArray[responseArray.length-1].answer);
         for (object of responseArray){
             $('#calculationHistory').append(
-                `<li>${object.inputOne} ${object.operationInput} ${object.inputTwo} = ${object.answer} </li>`
+                `<li class="previousCalc" id="${object.answer}">${object.inputOne} ${object.operationInput} ${object.inputTwo} = ${object.answer}</li>`
             )
         }
     } else {
@@ -166,6 +167,11 @@ function deleteCalculationHistory(){
     })
 }
 
+
+function rerunCalculation(){
+    const returnAnswer = $(this).attr('id');
+    updateInputDisplay(returnAnswer);
+}
 
 
 // POSSIBLE IDEAS
