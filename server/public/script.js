@@ -7,6 +7,10 @@ let calculatorObject = {
     inputTwo: '',
 };
 
+// variable used to hold the calculator input
+let inputDisplay = ''
+
+
 /**
  * Runs on document load.  Initiates multiple .on('click') functions.
  * Retrieves any previous calculation history from the server.
@@ -16,7 +20,7 @@ function readyNow(){ // runs on document load
     $('.operationButton').on('click', getOperationButton); // on +, -, *, / button click
     $('#equalSign').on('click', equalButtonPushed); // on = button click
     $('#clearButton').on('click', clickClearButton); // on C button click
-    //$('.numberButton').on('click', 'SpaceHolder'); // NEEDS ATTENTION NUMBER CLICK
+    $('.numberButton').on('click', appendButtonClicks); // NEEDS ATTENTION NUMBER CLICK
     getCalculationHistory(); // retrieve any stored server history
 }
 
@@ -27,6 +31,7 @@ function readyNow(){ // runs on document load
 function clickClearButton(){ // GOOD
     $('.numberInputs').val('');
     $('#answer').empty();
+    inputDisplay = ''
 }
 
 
@@ -78,11 +83,22 @@ function retrieveNumberInputs(){
 }
 
 
+function appendButtonClicks(){
+    let buttonClick = $(this).attr('id');
+    console.log(buttonClick);
+    inputDisplay += buttonClick;
+    console.log(inputDisplay);
+    $('#onlyInput').val(inputDisplay);
+}
+
+
 /**
  * Runs on click of an operation button.  Assigns to calculatorObject.
  */
 function getOperationButton(){
     let operation = $(this).attr('id');
+    inputDisplay += operation;
+    $('#onlyInput').val(inputDisplay);
     calculatorObject.operationInput = operation;
     //console.log(`operator selected:`, operation)
     //console.log(calculatorObject)
@@ -128,3 +144,10 @@ function processGetArray(responseArray){
         $('#calculationHistory').append(`No Calculation History`)
     }
 }
+
+
+
+// POSSIBLE IDEAS
+// if another operand is hit after one has already been assigned to Object
+// run a POST request, then use the answer as the next input
+// This would require clearing the object each time
