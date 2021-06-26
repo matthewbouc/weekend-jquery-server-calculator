@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>CALCULATOR TIME</h1>
+
+    <input type="number" class="numberInputs" id="firstInput"/>
+    <button class="operationButton" id="+">+</button>
+    <button class="operationButton" id="-">-</button>
+    <button class="operationButton" id="*">*</button>
+    <button class="operationButton" id="/">/</button>
+    <input type="number" class="numberInputs" id="secondInput"/>
+    <button id="equalSign">=</button>
+    <button id="clearButton">C</button>
+
+    <h3 id="answer">
+        <!-- answer appended here -->
+    </h3>
+
+    <ul id="calculationHistory">
+        <!-- <li> goes here -->
+    </ul>
+
+
+    <script src ="vendors/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
