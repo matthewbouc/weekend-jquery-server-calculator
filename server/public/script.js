@@ -1,3 +1,6 @@
+//ALLOW USER TO CLICK A SECOND OPERAND AFTER INPUTONE, OPERATIONINPUT, INPUTTWO.
+// second operand click would perform the same task as equal
+
 $(document).ready(readyNow);
 
 //object is used to accept inputs, then POST to server
@@ -40,7 +43,10 @@ function appendButtonClicks(){
     $('#onlyInput').val(inputDisplay);
 }
 
-
+/**
+ * Removes last clicked button from displayInput and DOM.
+ * Checks if removed value is an operand, if so resets calculatorObject.operationInput.
+ */
 function backspaceButton(){
     //console.log('backspace pushed')
     console.log(inputDisplay)
