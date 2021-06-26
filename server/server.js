@@ -44,10 +44,23 @@ function getResponseToPost(equation){
 
 
 function convertPost(equationObject){
-    let equationString = ''
-    for (property in equationObject){
-        equationString += equationObject[property]
+    const firstProperty = Number(equationObject.inputOne);
+    const secondProperty = equationObject.operationInput;
+    const thirdProperty = Number(equationObject.inputTwo);
+    switch (secondProperty) {
+        case '+':
+            return firstProperty + thirdProperty;
+            break;
+        case '-':
+            return firstProperty - thirdProperty;
+            break;
+        case '*':
+            return firstProperty * thirdProperty;
+            break;
+        case '/':
+            return firstProperty / thirdProperty;
+            break;
+        default:
+            break;
     }
-    console.log(equationString)
-    return eval(equationString);
 }
