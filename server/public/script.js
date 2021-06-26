@@ -101,3 +101,4 @@ function processGetArray(responseArray){
         $('#calculationHistory').append(`No Calculation History`)
     }
 }
+// base mode complete
