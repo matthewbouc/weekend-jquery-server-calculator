@@ -34,11 +34,11 @@ function clickClearButton(){
  */
 function equalButtonPushed(){
     getNumberInputs();
-    //console.log(calculatorObject)
+    console.log(calculatorObject)
     if(calculatorObject.inputOne == '' || calculatorObject.operationInput == '' || calculatorObject.inputTwo == ''){
         alert('Number inputs and operand required')
     } else {
-        console.log('sending to server...')
+        //console.log('sending to server...')
         postCalculationToServer();
     }
 }

@@ -16,6 +16,7 @@ function readyNow(){ // runs on document load
     $('.operationButton').on('click', getOperationButton); // on +, -, *, / button click
     $('#equalSign').on('click', equalButtonPushed); // on = button click
     $('#clearButton').on('click', clickClearButton); // on C button click
+    //$('.numberButton').on('click', 'SpaceHolder'); // NEEDS ATTENTION NUMBER CLICK
     getCalculationHistory(); // retrieve any stored server history
 }
 
@@ -23,7 +24,7 @@ function readyNow(){ // runs on document load
 /**
  * Clears DOM number inputs and answer display on C click
  */
-function clickClearButton(){
+function clickClearButton(){ // GOOD
     $('.numberInputs').val('');
     $('#answer').empty();
 }
@@ -33,7 +34,7 @@ function clickClearButton(){
  * On = click, Runs getNumberInputs(). If inputs are empty, triggers alert. Initiates POST to server.
  */
 function equalButtonPushed(){
-    getNumberInputs();
+    retrieveNumberInputs();
     console.log(calculatorObject)
     if(calculatorObject.inputOne == '' || calculatorObject.operationInput == '' || calculatorObject.inputTwo == ''){
         alert('Number inputs and operand required')
@@ -64,13 +65,16 @@ function getCalculationHistory(){
 
 
 /**
- * Retrieves values from number inputs and assigns them to calculatorObject.
+ * UPDATE
  */
-function getNumberInputs(){
-    let firstInput = $('#firstInput').val();
-    let secondInput = $('#secondInput').val();
-    calculatorObject.inputOne = firstInput;
-    calculatorObject.inputTwo = secondInput;
+function retrieveNumberInputs(){
+    const stringInput = $('#onlyInput').val();
+    console.log(`stringInput`, stringInput);
+    const operandUsed = calculatorObject.operationInput;
+    const inputArray = stringInput.split(operandUsed);
+    calculatorObject.inputOne = inputArray[0];
+    calculatorObject.inputTwo = inputArray[1];
+    console.log(inputArray);
 }
 
 
