@@ -20,7 +20,8 @@ function readyNow(){ // runs on document load
     $('.operationButton').on('click', getOperationButton); // on +, -, *, / button click
     $('#equalSign').on('click', equalButtonPushed); // on = button click
     $('#clearButton').on('click', clickClearButton); // on C button click
-    $('.numberButton').on('click', appendButtonClicks); // NEEDS ATTENTION NUMBER CLICK
+    $('.numberButton').on('click', appendButtonClicks);
+    $('#clearHistory').on('click', deleteCalculationHistory);
     getCalculationHistory(); // retrieve any stored server history
 }
 
@@ -126,15 +127,19 @@ function postCalculationToServer(){
 }
 
 
+function updateInputDisplay(displayString){
+    inputDisplay = displayString
+    $('#onlyInput').val(inputDisplay)
+}
+
 /**
  * Empties previous DOM answer and history. Appends new answer and updated history.
  * @param {array} responseArray 
  */
 function processGetArray(responseArray){
-    $('#answer').empty();
     $('#calculationHistory').empty()
     if (responseArray.length > 0){
-        $('#answer').append(responseArray[responseArray.length-1].answer);
+        updateInputDisplay(responseArray[responseArray.length-1].answer);
         for (object of responseArray){
             $('#calculationHistory').append(
                 `<li>${object.inputOne} ${object.operationInput} ${object.inputTwo} = ${object.answer} </li>`
@@ -143,6 +148,22 @@ function processGetArray(responseArray){
     } else {
         $('#calculationHistory').append(`No Calculation History`)
     }
+}
+
+
+function deleteCalculationHistory(){
+    $.ajax({
+        method: 'DELETE',
+        url: '/equationHistory'
+    })
+    .then(function(response){
+        console.log(`successful delete`, response);
+        getCalculationHistory();
+        updateInputDisplay('');
+    })
+    .catch(function(error){
+        console.log(`Error`, error);
+    })
 }
 
 

@@ -30,6 +30,12 @@ app.post('/equalButton', function(req, res){
     res.sendStatus(201);
 })
 
+app.delete('/equationHistory', function(req,res){
+    console.log('deleting history array');
+    equationHistory = [];
+    res.sendStatus(201);
+})
+
 
 // function that handles and creates a new object to resend to the client
 
