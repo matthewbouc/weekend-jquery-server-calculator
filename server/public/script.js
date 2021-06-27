@@ -10,6 +10,10 @@ let calculatorObject = {
 // variable used to hold the calculator input
 let inputDisplay = ''
 
+// used to allow for string operations together, without needing '='
+let operatorHolder;
+
+
 
 /**
  * Runs on document load.  Initiates multiple .on('click') functions.
@@ -137,8 +141,6 @@ function getCalculationHistory(){
     })
 }
 
-
-let operatorHolder;
 
 /**
  * Runs on click of an operation button.  Assigns to calculatorObject.
