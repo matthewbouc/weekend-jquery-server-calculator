@@ -1,5 +1,4 @@
-//ALLOW USER TO CLICK A SECOND OPERAND AFTER INPUTONE, OPERATIONINPUT, INPUTTWO.
-// second operand click would perform the same task as equal
+// Known bugs - dividing by 0.000s sends null to server (only solution might be server side)
 
 $(document).ready(readyNow);
 
@@ -80,6 +79,7 @@ function clickClearButton(){ // GOOD
     $('.numberInputs').val('');
     $('#answer').empty();
     inputDisplay = ''
+    clearCalculatorObject();
 }
 
 
@@ -109,10 +109,10 @@ function equalButtonPushed(){
     retrieveNumberInputs();
     console.log(calculatorObject)
     if(!calculatorObject.inputOne || !calculatorObject.operationInput || !calculatorObject.inputTwo || calculatorObject.inputOne == 'E' 
-        || calculatorObject.inputOne == 'null' || calculatorObject.inputTwo == '0' && calculatorObject.operationInput == '/'){
+        || calculatorObject.inputOne == 'null' || calculatorObject.inputTwo == 0 && calculatorObject.operationInput == '/'){
         //alert('Number inputs and operand required')
         updateInputDisplay('E');
-        clearCalculatorObject();
+        calculatorObject.inputOne = 'E'
     } else {
         //console.log('sending to server...')
         postCalculationToServer();
@@ -222,10 +222,17 @@ function rerunCalculation(){
     const stringInput = $('#onlyInput').val();
     console.log(`stringInput`, stringInput);
     const operandUsed = calculatorObject.operationInput;
-    const inputArray = stringInput.split(operandUsed);
-    calculatorObject.inputOne = inputArray[0];
-    calculatorObject.inputTwo = inputArray[1];
-    console.log(inputArray);
+    if (stringInput[0] == '-'){
+        const newString= stringInput.slice(1);
+        const inputArray = newString.split(operandUsed);
+        calculatorObject.inputOne = '-' + inputArray[0];
+        calculatorObject.inputTwo = inputArray[1];
+    } else {
+        const inputArray = stringInput.split(operandUsed);
+        calculatorObject.inputOne = inputArray[0];
+        calculatorObject.inputTwo = inputArray[1];
+        console.log(inputArray);
+    }
 }
 
 
