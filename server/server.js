@@ -10,7 +10,7 @@ app.use(express.static('server/public'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 //server to listen at specific port
-app.listen(PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('listening on port', PORT)
 });
 
