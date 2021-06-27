@@ -27,9 +27,10 @@ app.post('/equalButton', function(req, res){
     console.log('receiving equation,', req.body);
     let equation = req.body.calculatorObject;
     console.log('new equation', equation);
-    getResponseToPost(equation);
+    let responseStatus = getResponseToPost(equation);
+    console.log(responseStatus);
     //equationHistory.push(equation); // Do this as a function instead?!
-    res.sendStatus(201);
+    res.sendStatus(responseStatus);
 })
 //DELETE request from client will empty the equationHistory array.
 app.delete('/equationHistory', function(req,res){
@@ -73,9 +74,15 @@ function convertPost(equationObject){
  */
 function getResponseToPost(equation){
     let stringEval = convertPost(equation);
-    equation.answer = stringEval;
-    //console.log(stringEval)
-    //console.log (equation);
-    equationHistory.push(equation);
-    //console.log(equationHistory);
+    console.log(stringEval);
+    if (isNaN(stringEval)){
+        return 403
+    } else {
+        equation.answer = stringEval;
+        //console.log(stringEval)
+        //console.log (equation);
+        equationHistory.push(equation);
+        //console.log(equationHistory);
+        return 201
+    }
 }

@@ -1,5 +1,3 @@
-// Known bugs - dividing by 0.000s sends null to server (only solution might be server side)
-
 $(document).ready(readyNow);
 
 //object is used to accept inputs, then POST to server
@@ -181,6 +179,9 @@ function postCalculationToServer(){
     })
     .catch(function(error){
         console.log('Error', error)
+        inputDisplay = 'E';
+        calculatorObject.inputOne = 'E';
+        $('#onlyInput').val('E');
     })
 }
 
