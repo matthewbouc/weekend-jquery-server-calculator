@@ -108,8 +108,11 @@ function deleteCalculationHistory(){
 function equalButtonPushed(){
     retrieveNumberInputs();
     console.log(calculatorObject)
-    if(calculatorObject.inputOne == '' || calculatorObject.operationInput == '' || calculatorObject.inputTwo == ''){
-        alert('Number inputs and operand required')
+    if(!calculatorObject.inputOne || !calculatorObject.operationInput || !calculatorObject.inputTwo || calculatorObject.inputOne == 'E' 
+        || calculatorObject.inputOne == 'null' || calculatorObject.inputTwo == '0' && calculatorObject.operationInput == '/'){
+        //alert('Number inputs and operand required')
+        updateInputDisplay('E');
+        clearCalculatorObject();
     } else {
         //console.log('sending to server...')
         postCalculationToServer();
@@ -137,12 +140,19 @@ function getCalculationHistory(){
 }
 
 
+let operatorHolder;
+
 /**
  * Runs on click of an operation button.  Assigns to calculatorObject.
+ * Allows user to string together calculations without clicking equal.
  */
 function getOperationButton(){
     if (calculatorObject.operationInput){
-        alert(`Operand already selected.  Clear or submit calculation`)
+        //alert(`Operand already selected.  Clear or submit calculation`)
+        operatorHolder = $(this).attr('id');
+        equalButtonPushed()
+        // inputDisplay += operatorHolder;
+        // $('#onlyInput').val(inputDisplay);
     } else {
         let operation = $(this).attr('id');
         inputDisplay += operation;
@@ -225,5 +235,10 @@ function rerunCalculation(){
  */
 function updateInputDisplay(displayString){
     inputDisplay = String(displayString); // change global variable
+    if (operatorHolder){ // Allows user to string together operations without clicking equal
+        inputDisplay += operatorHolder;
+        calculatorObject.operationInput = operatorHolder;
+    }
     $('#onlyInput').val(inputDisplay); // change DOM
+    operatorHolder = '';
 }
