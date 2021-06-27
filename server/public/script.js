@@ -209,14 +209,20 @@ function processGetArray(responseArray){
 
 /**
  * Allows user to click on a DOM history calculation and 'rerun' it.
- * Sets the answer to the input display. --- UPDATED: adds clicked calculation onto end of input field.  allows user to add answer into existing equation.
+ * If operator present, add previous answer onto end of calculation.
+ * Otherwise, replace current input with answer.
  */
 function rerunCalculation(){
     const returnAnswer = $(this).attr('id');
-    // updateInputDisplay(returnAnswer);
-    // clearCalculatorObject();
-    inputDisplay += returnAnswer;
-    $('#onlyInput').val(inputDisplay);
+    const operators = '+*-/';
+    console.log()
+    if (operators.indexOf(inputDisplay[inputDisplay.length-1]) >= 0){
+        inputDisplay += returnAnswer;
+        $('#onlyInput').val(inputDisplay);
+    } else {
+        updateInputDisplay(returnAnswer);
+        clearCalculatorObject();
+    }    
 }
 
 
