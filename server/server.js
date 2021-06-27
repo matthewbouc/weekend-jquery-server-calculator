@@ -75,7 +75,7 @@ function convertPost(equationObject){
 function getResponseToPost(equation){
     let stringEval = convertPost(equation);
     console.log(stringEval);
-    if (isNaN(stringEval)){
+    if (isNaN(stringEval)){ // if math eval is NaN, throw an error.
         return 403
     } else {
         equation.answer = stringEval;

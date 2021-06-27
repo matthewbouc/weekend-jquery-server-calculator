@@ -177,7 +177,7 @@ function postCalculationToServer(){
         // RUN THE GET RESPONSE HERE
         getCalculationHistory();
     })
-    .catch(function(error){
+    .catch(function(error){ //if an error is thrown (such as 403) - display error
         console.log('Error', error)
         inputDisplay = 'E';
         calculatorObject.inputOne = 'E';
