@@ -197,12 +197,12 @@ function processGetArray(responseArray){
     if (responseArray.length > 0){
         updateInputDisplay(responseArray[responseArray.length-1].answer);
         for (object of responseArray){
-            $('#calculationHistory').append(
-                `<li class="previousCalc" id="${object.answer}">${object.inputOne} ${object.operationInput} ${object.inputTwo} = ${object.answer}</li>`
+            $('#calculationHistory').prepend(
+                `<tr class="previousCalc" id="${object.answer}"><td>${object.inputOne} ${object.operationInput} ${object.inputTwo} = ${object.answer}</td></tr>`
             )
         }
     } else {
-        $('#calculationHistory').append(`No Calculation History`)
+        $('#calculationHistory').append(`<tr><td>No Calculation History</td></tr>`)
     }
 }
 

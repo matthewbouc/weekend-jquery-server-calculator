@@ -12,6 +12,12 @@ h1 {
     transform: translateY(2px);
 }
 
+.numberButton,
+.operationButton,
+.extraButton {
+    box-shadow: 1px 1px 1px rgb(0,0,0);
+}
+
 #calculator {
     width: 250px;
     height: 300px;
@@ -22,6 +28,8 @@ h1 {
     display: block;
     margin-left: 25%;
     margin-right: auto;
+    box-shadow: 5px 5px 15px rgb(0,0,0);
+    border-radius: 8px;
 }
 
 #backspace {
@@ -65,4 +73,8 @@ h1 {
     display: block;
     margin-left: -2%;
     margin-right: auto;
+}
+
+table td:hover {
+    background-color: rgb(225, 232, 235);
 }
