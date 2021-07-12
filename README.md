@@ -19,10 +19,9 @@ The user will get an 'E' for error when trying to:
 - Enter two operators without a valid number in between them
 - Enter incorrectly formatted numbers
 
-Your project description goes here. What problem did you solve? How did you solve it?
 
-Image of [Calculator](https://github.com/matthewbouc/weekend-jquery-server-calculator/blob/master/images/Calculator.png).
-
+## Screenshot:
+![Project Screen Shot](./images/Calculator.png)
 
 ## Installation:
 
